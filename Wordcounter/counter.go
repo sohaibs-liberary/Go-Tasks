@@ -4,37 +4,32 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strings"
 )
 
-func wordcounter() {
+func Wordcounter(content string) {
+  
+	word := strings.Fields(content)
 
+	fmt.Printf("Total words: %d\n", len(word))
 }
 
 func main() {
+	data, _ := os.Open("counter.txt")
+	defer data.Close()
 
-	file, _ := os.Open("counter.txt")
-    defer file.Close()
+	r := bufio.NewReader(data)
 
-   r := bufio.NewReader(file)
+	for {
+		line, _, err := r.ReadLine()
 
-for {
+		if len(line) > 0 {
+			Wordcounter(string(line))
+		}
 
-  file, _, err := r.ReadLine()
-  
-  if len(file) > 0 {
-
-    fmt.Printf("%q\n", file)
-
-  }
-
-  if err != nil {
-
-	fmt.Printf("this is an error %v\n" ,err)
-
-    break
-
-  }
-
- }
-
+		if err != nil {
+			fmt.Printf("This is an error %v\n", err)
+			break
+		}
+	}
 }
