@@ -1,15 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"os"
-	
-
 )
+
+var ch string
 
 func countWords(content string) int {
 
+	// Wrod Counting
 
 	count := 0
 	inWord := false
@@ -67,27 +67,11 @@ func Letterscounter(constant string) int {
 }
 
 func main() {
-	data, _ := os.Open("counter.txt")
-	defer data.Close()
+	fileData, _ := os.ReadFile("word.txt")
+	content := string(fileData)
 
-	total := 0
-	totalsapce := 0
-	totalline := 0
-	totalletter := 0
-
-	scanner := bufio.NewScanner(data)
-
-	for scanner.Scan() {
-		total += countWords(scanner.Text())
-		totalsapce += spaceCounting(scanner.Text())
-		totalline += Linecounter(scanner.Text())
-		totalletter += Letterscounter(scanner.Text())
-
-	}
-
-	fmt.Printf("Total Word : %d\n", total)
-	fmt.Printf("Total space : %d\n", totalsapce)
-	fmt.Printf("Total Lines : %d\n", totalline)
-	fmt.Printf("Total Letter : %d\n", totalletter)
-
+	fmt.Println("Total Words  :", countWords(content))
+	fmt.Println("Total Spaces  :", spaceCounting(content))
+	fmt.Println("Total Lines  :", Linecounter(content))
+	fmt.Println("Total Letters :", Letterscounter(content))
 }
