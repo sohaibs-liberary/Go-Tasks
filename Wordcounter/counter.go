@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 )
 
 var ch string
@@ -73,8 +74,9 @@ func Spaceialchars(constant string) int {
 	Special := 0
 
 	for _, ch := range constant {
+		
 		switch ch {
-		case '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '~', '`':
+		case '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '~', '`'  :
 			Special++
 		}
 
@@ -84,6 +86,10 @@ func Spaceialchars(constant string) int {
 }
 
 func main() {
+
+	start := time.Now()
+
+
 	fileData, _ := os.ReadFile("counter.txt")
 	content := string(fileData)
 
@@ -92,5 +98,7 @@ func main() {
 	fmt.Println("Total Lines  :", Linecounter(content))
 	fmt.Println("Total Letters :", Letterscounter(content))
 	fmt.Println("Total Special Characters :", Spaceialchars(content))
+
+	 fmt.Println("Execution time:",  time.Since(start))
 
 }
