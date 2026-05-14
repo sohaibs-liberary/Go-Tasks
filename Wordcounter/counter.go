@@ -6,7 +6,6 @@ import (
 	"time"
 )
 
-var ch string
 
 func countWords(content string) int {
 

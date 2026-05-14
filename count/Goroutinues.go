@@ -55,16 +55,22 @@ func countChunk(chunk []rune) result {
 }
 
 func main() {
-	start := time.Now()
+
+	var num int
 
 	fileData, _ := os.ReadFile("word.txt")
 
 	runes := []rune(string(fileData))
 	total := len(runes)
 
+	fmt.Println("Enter NO of Workers")
+	fmt.Scan(&num)
+
+	start := time.Now()
+
 	// Number of Goroutinues
 
-	numWorkers := 2
+	numWorkers := num
 	chunkSize := (total + numWorkers - 1) / numWorkers
 
 	resultCh := make(chan result, numWorkers)
@@ -110,35 +116,14 @@ func main() {
 	}
 
 	fmt.Printf("Total Words: %d\n", final.words)
-	fmt.Printf("Total Letters: %d\n", final.letters)
+	// fmt.Printf("Total Letters: %d\n", final.letters)
 	fmt.Printf("Total Lines: %d\n", final.lines)
 	fmt.Printf("Total Special: %d\n", final.special)
 	fmt.Printf("Total Spaces: %d\n", final.spaces)
-	fmt.Printf("Total Paragraphs: %d\n", final.paragraphs)
+	// fmt.Printf("Total Paragraphs: %d\n", final.paragraphs)
 	fmt.Printf("Total Vowels:%d\n", final.vowels)
 	fmt.Println("Execution time:", time.Since(start))
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // for _, ch := range string(fileData) {
 // 	letters++
