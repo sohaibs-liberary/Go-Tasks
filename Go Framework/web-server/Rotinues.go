@@ -15,7 +15,7 @@ type result struct {
 	letters int
 }
 
-func filecontext() {
+func filecontext(result) {
 
 	var num int
 	fileData, _ := os.ReadFile("word.txt")
@@ -111,4 +111,13 @@ func filecontext() {
 	fmt.Printf("Total Special: %d\n", finalSpecial)
 
 	fmt.Println("Execution time:", time.Since(startTime))
+
+	return result struct {
+		
+    finalLetters int
+    finalWord    int
+    finalLines   int
+    finalSpace   int
+    finalSpecial int
+}
 }

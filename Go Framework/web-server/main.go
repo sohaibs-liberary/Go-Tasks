@@ -17,6 +17,6 @@ func main() {
 }
 func filecount(context *gin.Context) {
 	route.Filecontext()
-    context.IndentedJSON(http.StatusOK, gin.H{"Status": "Done"})
+    context.IndentedJSON(http.StatusOK, route.Filecontext())
 }
 
