@@ -48,12 +48,39 @@ func main() {
 	}
 	wg.Add(1)
 
-	go func(chunkSize) {
+	go func(chunk) {
 
 		defer wg.Done()
 
 		returnCh <- result{}
 		inWord := false
+
+		for _, b := range chunk {
+				ch := int(b)
+				
+
+				switch ch {
+				case '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '}', '[', ']', '|', '\\', ':', ';', '"', '\'', '<', '>', ',', '.', '?', '/', '~', '`':
+					res.special++
+				}
+
+				if ch == ' ' {
+					res.spaces++
+				}
+				if ch == '\n' {
+					res.lines++
+				}
+
+				if ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r' {
+					inWord = false
+				} else if !inWord {
+					res.words++
+					inWord = true
+				}
+			}
+
+			resultChan <- res
+		}(fileData[startIdx:endIdx])
 
 		
 	}()
