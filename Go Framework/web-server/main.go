@@ -2,9 +2,8 @@ package main
 
 import (
 	"net/http"
+	"web-server/route"
 	"github.com/gin-gonic/gin"
-	
-	
 )
 
 
@@ -17,6 +16,7 @@ func main() {
 	router.Run(":8001")
 }
 func filecount(context *gin.Context) {
-    context.IndentedJSON(http.StatusOK, gin.H{"message": "ok"})
+	route.Filecontext()
+    context.IndentedJSON(http.StatusOK, gin.H{"Status": "Done"})
 }
 
