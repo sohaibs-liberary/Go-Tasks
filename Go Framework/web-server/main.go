@@ -12,11 +12,11 @@ import (
 func main() {
 	var router *gin.Engine = gin.Default()
 
-	router.GET("/people", filecontext())
+	router.GET("/count", filecount)
 
 	router.Run(":8001")
 }
-
-func getPeople(context *gin.Context) {
-	context.IndentedJSON(http.StatusOK, filecontext())
+func filecount(context *gin.Context) {
+    context.IndentedJSON(http.StatusOK, gin.H{"message": "ok"})
 }
+

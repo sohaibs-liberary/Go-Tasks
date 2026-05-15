@@ -8,15 +8,15 @@ import (
 )
 
 type result struct {
-    Words   int `json:"words"`
-    Letters int `json:"letters"`
-    Lines   int `json:"lines"`
-    Spaces  int `json:"spaces"`
-    Special int `json:"special"`
+    Words   int 
+    Letters int 
+    Lines   int 
+    Spaces  int 
+    Special int 
 
 }
 
-func Filecontext() result {
+func Filecontext() {
 
 	var num int
 	fileData, _ := os.ReadFile("word.txt")
@@ -114,12 +114,5 @@ func Filecontext() result {
 	fmt.Println("Execution time:", time.Since(startTime))
 
 
-    return result{
-        Words:   finalWords,
-        Letters: finalLetters,
-        Lines:   finalLines,
-       Spaces:  finalSpaces,
-        Special: finalSpecial,
-    }
 
 }
