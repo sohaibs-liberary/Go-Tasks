@@ -19,6 +19,7 @@ func main() {
     
      var num int
     fileData, _ := os.ReadFile("word.txt")
+	
     content := string(fileData)
 
 	fmt.Println("Enter The Number of Goroutinues")
@@ -26,7 +27,7 @@ func main() {
 
     totalLen := len(content)
 
-	
+
 
     worker := num
     chunkSize := (totalLen + worker - 1) / worker
@@ -38,9 +39,7 @@ func main() {
 
 	startTime := time.Now()
 
-	
 
-    // chunk data
     for i := 0; i < worker; i++ {
         start := i * chunkSize
         end := start + chunkSize
@@ -80,7 +79,6 @@ func main() {
                         res.words++
                         inWord = true
                     }
-                    // count letters (non-whitespace, non-special)
                     if (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') {
                         res.letters++
                     }
