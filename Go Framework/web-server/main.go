@@ -1,8 +1,10 @@
 package main
 
 import (
+	// "fmt"
 	"net/http"
-    "web-server/Routines"
+	"strconv"
+	routines "web-server/Routines"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,20 +20,27 @@ type WordCountResponse struct {
 func main() {
 	var router *gin.Engine = gin.Default()
 
-	router.GET("/count", filecount)
+	router.GET("/count/:Id", filecount)
 
-	router.Run(":8001")
+	router.Run(":8000")
 }
-func filecount(context *gin.Context) {
-	letters, words, lines, spaces, special := routines.Filecontext()
+func filecount(ctx *gin.Context) {
 
-	wordCountResponse:= WordCountResponse{
-		WordCount: words,
-		LetterCount: letters,
-		LineCount: lines,
-		SpaceCount: spaces,
-		SpecialCharCount: special,
+
+		key := ctx.Param("Id")
+        Id, _ := strconv.Atoi(key)
+
+	letters, words, lines, spaces, special := routines.Filecontext(Id)
+
+
+
+	wordCountResponse := WordCountResponse {
+		WordCount:          words,
+		LetterCount:        letters,
+		LineCount:          lines,
+		SpaceCount:         spaces,
+		SpecialCharCount:   special,
 	}
 
-	context.IndentedJSON(http.StatusOK, wordCountResponse)
+	ctx.IndentedJSON(http.StatusOK, wordCountResponse)
 }

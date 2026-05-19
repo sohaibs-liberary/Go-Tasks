@@ -22,23 +22,23 @@ type result struct {
 // finalLines   ,
 // finalSpace   ,
 // finalSpecial ,
-func Filecontext() (int, int, int, int, int) {
+func Filecontext(Id int) (int, int, int, int, int) {
 
-	var num int
+	// var Id int
 	fileData, err := os.ReadFile("Routines/word.txt")
 	if err != nil {
-		fmt.Println("file isn't exits" , err )
-	
-	}
+		fmt.Println("file isn't exits", err)
 
+	}
+	
 	content := string(fileData)
 
-	fmt.Println("Enter The Number of Goroutinues")
-	fmt.Scan(&num)
+	// fmt.Println("Enter The Number of Goroutinues")
+	// fmt.Scan(&num)
 
 	totalLen := len(content)
 
-	worker := num
+	worker := Id
 	chunkSize := (totalLen + worker - 1) / worker
 
 	resultChan := make(chan result, worker)
