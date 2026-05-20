@@ -38,7 +38,7 @@ func filecount(ctx *gin.Context) {
 	file , _, err := ctx.Request.FormFile("file")
 
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"error" : "Failde upload file required "})
+		ctx.JSON(http.StatusBadRequest, gin.H{"error" : "Failed upload file  "})
 
 	}
 
