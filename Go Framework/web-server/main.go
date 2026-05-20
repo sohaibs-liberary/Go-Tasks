@@ -30,7 +30,13 @@ func filecount(ctx *gin.Context) {
 
 
 	key := ctx.Param("Id")
-	Id, _ := strconv.Atoi(key)
+	Id, err := strconv.Atoi(key)
+	if err!=nil{
+		ctx.JSON(http.StatusBadRequest, gin.H{"error" : "Failed to Convert "})
+		return
+
+
+	}
 
 	
 
@@ -39,9 +45,9 @@ func filecount(ctx *gin.Context) {
 
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error" : "Failed upload file  "})
+		return
 
 	}
-
 
 	data , err := io.ReadAll(file)
 	if err != nil {
